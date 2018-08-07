@@ -1,12 +1,10 @@
 // Dijkstra's Algorithm
-#include <limits>
 #include <cstdio>
+#include <limits>
 
 // Number of vertices in graph
 constexpr int vertex_count = 9;
-constexpr int max_const_expr = 9999999;
 
-// A utility function to print the constructed distance array
 auto PrintSolution(int dist[], int n) -> void
 {
 	printf("Vertex\tDistance from Source\n");
@@ -18,7 +16,7 @@ auto PrintSolution(int dist[], int n) -> void
 
 auto MinimumDistance(int dist[9], bool sptSet[9]) -> int 
 {
-	auto min = max_const_expr;
+	auto min = std::numeric_limits<int>::max();
 	auto minIndex = -1;
 
 	for (auto vertex = 0; vertex < vertex_count; ++vertex)
@@ -41,7 +39,7 @@ auto Djikstra(const int graph[vertex_count][vertex_count], int src)
 	// Initialise all distances as infinite and stpSet[] as false
 	for (auto &element : dist)
 	{
-		element = max_const_expr;
+		element = std::numeric_limits<int>::max();
 	}
 	for (auto &element: sptSet)
 	{
@@ -55,7 +53,6 @@ auto Djikstra(const int graph[vertex_count][vertex_count], int src)
 	{
 		// Pick the minimum distance vertex from the set of vertices not yet processed, u == src in iteration 1
 		const auto minVertex = MinimumDistance(dist, sptSet);
-
 		if (minVertex == -1) continue;
 
 		// Mark the picked vertex as processed
@@ -82,8 +79,7 @@ auto Djikstra(const int graph[vertex_count][vertex_count], int src)
 
 int main()
 {
-	const int graph[vertex_count][vertex_count] = {
-		{ 0, 4, 0, 0, 0, 0, 0, 8, 0 },
+	const int graph[vertex_count][vertex_count] = { { 0, 4, 0, 0, 0, 0, 0, 8, 0 },
 		{ 4, 0, 8, 0, 0, 0, 0, 11, 0 },
 		{ 0, 8, 0, 7, 0, 4, 0, 0, 2 },
 		{ 0, 0, 7, 0, 9, 14, 0, 0, 0 },
@@ -91,8 +87,7 @@ int main()
 		{ 0, 0, 4, 14, 10, 0, 2, 0, 0 },
 		{ 0, 0, 0, 0, 0, 2, 0, 1, 6 },
 		{ 8, 11, 0, 0, 0, 0, 1, 0, 7 },
-		{ 0, 0, 2, 0, 0, 0, 6, 7, 0 }
-	};
+		{ 0, 0, 2, 0, 0, 0, 6, 7, 0 }};
 
 	Djikstra(graph, 0);
 
