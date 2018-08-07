@@ -1,4 +1,4 @@
-// Djikstra's Algorithm
+// Dijkstra's Algorithm
 #include <limits>
 #include <cstdio>
 
@@ -82,7 +82,8 @@ auto Djikstra(const int graph[vertex_count][vertex_count], int src)
 
 int main()
 {
-	const int graph[vertex_count][vertex_count] = { { 0, 4, 0, 0, 0, 0, 0, 8, 0 },
+	const int graph[vertex_count][vertex_count] = {
+		{ 0, 4, 0, 0, 0, 0, 0, 8, 0 },
 		{ 4, 0, 8, 0, 0, 0, 0, 11, 0 },
 		{ 0, 8, 0, 7, 0, 4, 0, 0, 2 },
 		{ 0, 0, 7, 0, 9, 14, 0, 0, 0 },
@@ -90,7 +91,8 @@ int main()
 		{ 0, 0, 4, 14, 10, 0, 2, 0, 0 },
 		{ 0, 0, 0, 0, 0, 2, 0, 1, 6 },
 		{ 8, 11, 0, 0, 0, 0, 1, 0, 7 },
-		{ 0, 0, 2, 0, 0, 0, 6, 7, 0 }};
+		{ 0, 0, 2, 0, 0, 0, 6, 7, 0 }
+	};
 
 	Djikstra(graph, 0);
 
