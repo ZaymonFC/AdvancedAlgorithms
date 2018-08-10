@@ -48,7 +48,7 @@ auto Djikstra(const int graph[vertex_count][vertex_count], int src)
 
 	dist[src] = 0;
 
-	// Find shortest path for all vertices
+	// Find shortest path for all vertices 0 <= count < |V| - 1
 	for (auto count = 0; count < vertex_count-1; ++count)
 	{
 		// Pick the minimum distance vertex from the set of vertices not yet processed, u == src in iteration 1
