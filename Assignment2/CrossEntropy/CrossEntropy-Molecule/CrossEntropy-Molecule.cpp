@@ -158,31 +158,20 @@ bool pairCompair(const std::pair<double, Sequence> & firstElement, const std::pa
 
 auto CrossEntropy(const int sequenceLength) -> void
 {
-	auto shuntAttempts = 15;
+	auto shuntAttempts = 6;
 	// Parameters of cross entropy method
 	const auto populationSize = 1000;
-	const auto parameterBlend = 0.92;
+	const auto parameterBlend = 0.90;
 	const auto eliteDistribution = 0.15;
 
-	auto distributions = std::vector<WeightedDistribution>(sequenceLength, {3.14, 4});
+	auto distributions = std::vector<WeightedDistribution>(sequenceLength, {0, 3});
 
 	// Create initial vector of sequences
 	auto sequences = std::vector<Sequence>();
 	for (auto i = 0; i < populationSize; ++i)
 	{
-		// Passes vector of distributions to create new sequence
 		sequences.emplace_back(distributions);
 	}
-
-//	for(auto sequence : sequences)
-//	{
-//		printf("{");
-//		for (auto angle : sequence.angles)
-//		{
-//			printf("%lf,", angle);
-//		}
-//		printf("}\n");
-//	}
 
 	auto lastBest = std::numeric_limits<double>::max();
 	auto bestScore = std::numeric_limits<double>::max();
@@ -210,33 +199,6 @@ auto CrossEntropy(const int sequenceLength) -> void
 			bestScore = lastBest;
 			bestSequence = Sequence(scoredPopulation.at(0).second.angles);
 		}
-
-		if (diff < 0.00001)
-		{
-			if (shuntAttempts > 0)
-			{
-				for (auto & distribution : distributions)
-				{
-					if (rand() % 100 > 25)
-					{
-						const auto randMean = Randf(-1.57, 1.57);
-						const auto randSDev = Randf(1, 6);
-						distribution.UpdateParameters(randMean, randSDev);
-					}
-				}
-				shuntAttempts--;
-			} 
-			else
-			{
-				printf("\nReached Sigma\n");
-				printf("N: %d Best Score Found: %lf\n", sequenceLength, bestScore);
-				bestSequence.WriteFile("Molecule.txt");
-//				system("python ./DrawMolecule");
-				
-
-				break;
-			}
-		} 
 		
 		// Update distribution parameters (mean, std deviation) for each angle based ----
 		// off the values of the elite sample
@@ -265,8 +227,31 @@ auto CrossEntropy(const int sequenceLength) -> void
 			distributions.at(angle).UpdateParameters(mean, standardDeviation, parameterBlend);
 		}
 		
-		// Every few iterations cleanup the distributions
-		// TODO:
+		if (diff < 0.000005)
+		{
+			if (shuntAttempts > 0)
+			{
+				for (auto & distribution : distributions)
+				{
+					if (rand() % 100 > 50)
+					{
+						const auto randMean = Randf(-1, 0);
+						const auto randSDev = Randf(1, 3);
+						distribution.UpdateParameters(randMean, randSDev);
+					}
+				}
+				shuntAttempts--;
+			}
+			else
+			{
+				printf("\nReached Sigma\n");
+				printf("N: %d Best Score Found: %lf\n", sequenceLength, bestScore);
+				bestSequence.WriteFile("Molecule.txt");
+				//				system("python ./DrawMolecule");
+
+				break;
+			}
+		}
 
 		// Generate new population ------------------------------------------------------
 		sequences = std::vector<Sequence>();
@@ -282,7 +267,7 @@ auto CrossEntropy(const int sequenceLength) -> void
 
 int main()
 {
-	CrossEntropy(20);
+	CrossEntropy(40);
     return 0;
 }
 
