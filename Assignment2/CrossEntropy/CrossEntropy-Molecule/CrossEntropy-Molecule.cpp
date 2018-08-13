@@ -6,13 +6,13 @@
 #include <iostream>
 #include <numeric>
 #include <chrono>
-#include <memory>
+#include <fstream>
 
 #define PI 3.141592653589793238
 
 std::random_device rd{};
-std::mt19937 gen{ rd() };
-
+//std::mt19937 gen{ rd() };
+std::default_random_engine gen{ rd() };
 class WeightedDistribution {
 	// Mersenne Twister Random Engine
 //	std::shared_ptr<std::mt19937> gen;
@@ -137,6 +137,18 @@ public:
 			std::cout << '(' <<  position.x << ',' << position.y << ")," << std::endl;
 		}
 	}
+
+	auto WriteFile(std::string filename) -> void
+	{
+		std::ofstream fp(filename);
+		auto positions = CalculatePositions();
+
+		for (auto position : positions)
+		{
+			fp << position.x << ',' << position.y << std::endl;
+		}
+		fp.close();
+	}
 };
 
 bool pairCompair(const std::pair<double, Sequence> & firstElement, const std::pair<double, Sequence> & secondElement)
@@ -174,6 +186,7 @@ auto CrossEntropy(const int sequenceLength) -> void
 
 	auto lastBest = std::numeric_limits<double>::max();
 	auto bestScore = std::numeric_limits<double>::max();
+	auto bestSequence = Sequence();
 
 	for (auto iteration = 0; iteration < 3000; ++iteration)
 	{
@@ -195,6 +208,7 @@ auto CrossEntropy(const int sequenceLength) -> void
 		if (lastBest < bestScore)
 		{
 			bestScore = lastBest;
+			bestSequence = Sequence(scoredPopulation.at(0).second.angles);
 		}
 
 		if (diff < 0.00001)
@@ -216,6 +230,10 @@ auto CrossEntropy(const int sequenceLength) -> void
 			{
 				printf("\nReached Sigma\n");
 				printf("N: %d Best Score Found: %lf\n", sequenceLength, bestScore);
+				bestSequence.WriteFile("Molecule.txt");
+//				system("python ./DrawMolecule");
+				
+
 				break;
 			}
 		} 
