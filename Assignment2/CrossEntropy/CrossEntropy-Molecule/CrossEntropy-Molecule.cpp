@@ -11,11 +11,9 @@
 #define PI 3.141592653589793238
 
 std::random_device rd{};
-//std::mt19937 gen{ rd() };
-std::default_random_engine gen{ rd() };
+std::mt19937 gen{ rd() };
+
 class WeightedDistribution {
-	// Mersenne Twister Random Engine
-//	std::shared_ptr<std::mt19937> gen;
 
 	// Normal Distribution
 	std::normal_distribution<double> normal;
@@ -143,9 +141,13 @@ public:
 		std::ofstream fp(filename);
 		auto positions = CalculatePositions();
 
-		for (auto position : positions)
+		// Align to 0, 0
+		const auto xOffset = positions.at(0).x;
+		const auto yOffset = positions.at(0).y;
+
+		for (const auto position : positions)
 		{
-			fp << position.x << ',' << position.y << std::endl;
+			fp << position.x - xOffset << ',' << position.y - yOffset << std::endl;
 		}
 		fp.close();
 	}
@@ -233,7 +235,7 @@ auto CrossEntropy(const int sequenceLength) -> void
 			{
 				for (auto & distribution : distributions)
 				{
-					if (rand() % 100 > 50)
+					if (rand() % 100 > 30)
 					{
 						const auto randMean = Randf(-1, 0);
 						const auto randSDev = Randf(1, 3);
@@ -244,7 +246,7 @@ auto CrossEntropy(const int sequenceLength) -> void
 			}
 			else
 			{
-				printf("\nReached Sigma\n");
+				printf("\Surpased Epsilon\n");
 				printf("N: %d Best Score Found: %lf\n", sequenceLength, bestScore);
 				bestSequence.WriteFile("Molecule.txt");
 				//				system("python ./DrawMolecule");
@@ -267,7 +269,7 @@ auto CrossEntropy(const int sequenceLength) -> void
 
 int main()
 {
-	CrossEntropy(40);
+	CrossEntropy(20);
     return 0;
 }
 
