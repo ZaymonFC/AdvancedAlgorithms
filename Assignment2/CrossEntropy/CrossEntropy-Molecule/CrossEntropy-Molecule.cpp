@@ -7,6 +7,7 @@
 #include <numeric>
 #include <chrono>
 #include <fstream>
+#include <thread>
 
 #define PI 3.141592653589793238
 
@@ -160,10 +161,10 @@ bool pairCompair(const std::pair<double, Sequence> & firstElement, const std::pa
 
 auto CrossEntropy(const int sequenceLength) -> void
 {
-	auto shuntAttempts = 6;
+	auto shuntAttempts = 5;
 	// Parameters of cross entropy method
 	const auto populationSize = 1000;
-	const auto parameterBlend = 0.90;
+	const auto parameterBlend = 0.95;
 	const auto eliteDistribution = 0.15;
 
 	auto distributions = std::vector<WeightedDistribution>(sequenceLength, {0, 3});
@@ -184,10 +185,13 @@ auto CrossEntropy(const int sequenceLength) -> void
 		// Sort population by cost ------------------------------------------------------
 		auto scoredPopulation = std::vector<std::pair<double, Sequence>>();
 		scoredPopulation.reserve(populationSize);
+
+
 		for (auto element : sequences)
 		{
 			scoredPopulation.emplace_back(element.EvaluateCost(), element);
 		}
+
 		std::sort(scoredPopulation.begin(), scoredPopulation.end(), pairCompair);
 
 		
@@ -206,6 +210,7 @@ auto CrossEntropy(const int sequenceLength) -> void
 		// off the values of the elite sample
 		
 		// Loop through each angle
+#pragma loop(hint_parallel(8))
 		for (auto angle = 0; angle < sequenceLength; ++angle)
 		{
 			auto values = std::vector<double>();
@@ -229,7 +234,7 @@ auto CrossEntropy(const int sequenceLength) -> void
 			distributions.at(angle).UpdateParameters(mean, standardDeviation, parameterBlend);
 		}
 		
-		if (diff < 0.000005)
+		if (diff < 0.05)
 		{
 			if (shuntAttempts > 0)
 			{
@@ -242,6 +247,7 @@ auto CrossEntropy(const int sequenceLength) -> void
 						distribution.UpdateParameters(randMean, randSDev);
 					}
 				}
+
 				shuntAttempts--;
 			}
 			else
@@ -269,7 +275,7 @@ auto CrossEntropy(const int sequenceLength) -> void
 
 int main()
 {
-	CrossEntropy(20);
+	CrossEntropy(100);
     return 0;
 }
 
