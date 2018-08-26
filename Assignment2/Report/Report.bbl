@@ -1,0 +1,91 @@
+\begin{thebibliography}{}
+
+\bibitem [\protect \citeauthoryear {%
+Boer%
+, Kroese%
+, Mannor%
+\BCBL {}\ \BBA {} Rubinstein%
+}{%
+Boer%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2005}}%
+}]{%
+CE}
+\APACinsertmetastar {%
+CE}%
+\begin{APACrefauthors}%
+Boer, P\BHBI T\BPBI B.%
+, Kroese, D\BPBI P.%
+, Mannor, S.%
+\BCBL {}\ \BBA {} Rubinstein, R\BPBI Y.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2005}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {A Tutorial on the Cross-Entropy Method} {A tutorial on
+  the cross-entropy method}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Annals of Operations Research}{134}{}{19--67}.
+\newblock
+\begin{APACrefURL} \url{https://people.smp.uq.edu.au/DirkKroese/ps/aortut.pdf}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Botev%
+, Kroese%
+, Rubinstein%
+\BCBL {}\ \BBA {} L`Ecuyer%
+}{%
+Botev%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {{\protect \bibnodate {}}}}%
+}]{%
+CE2}
+\APACinsertmetastar {%
+CE2}%
+\begin{APACrefauthors}%
+Botev, Z\BPBI I.%
+, Kroese, D\BPBI P.%
+, Rubinstein, R\BPBI Y.%
+\BCBL {}\ \BBA {} L`Ecuyer, P.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{{\protect \bibnodate {}}}{}{}.
+\newblock
+\APACrefbtitle {The Cross-Entropy Method for Optimization.} {The cross-entropy
+  method for optimization.}
+\newblock
+\begin{APACrefURL} \url{https://people.smp.uq.edu.au/DirkKroese/ps/CEopt.pdf}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Jorge~Nocedal%
+}{%
+Jorge~Nocedal%
+}{%
+{\protect \APACyear {1999}}%
+}]{%
+numericalOptimization}
+\APACinsertmetastar {%
+numericalOptimization}%
+\begin{APACrefauthors}%
+Jorge~Nocedal, S\BPBI J\BPBI W.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYear{1999}.
+\newblock
+\APACrefbtitle {Numerical Optimization} {Numerical optimization}.
+\newblock
+\APACaddressPublisher{New York}{Springer-Verlag}.
+\newblock
+\begin{APACrefURL}
+  \url{http://www.bioinfo.org.cn/~wangchao/maa/Numerical\_Optimization.pdf}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\end{thebibliography}
