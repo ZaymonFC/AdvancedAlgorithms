@@ -161,9 +161,9 @@ bool pairCompair(const std::pair<double, Sequence> & firstElement, const std::pa
 
 auto CrossEntropy(const int sequenceLength) -> void
 {
-	auto shuntAttempts = 5;
+	auto shuntAttempts = 30;
 	// Parameters of cross entropy method
-	const auto populationSize = 1000;
+	const auto populationSize = 1250;
 	const auto parameterBlend = 0.95;
 	const auto eliteDistribution = 0.15;
 
@@ -180,7 +180,7 @@ auto CrossEntropy(const int sequenceLength) -> void
 	auto bestScore = std::numeric_limits<double>::max();
 	auto bestSequence = Sequence();
 
-	for (auto iteration = 0; iteration < 3000; ++iteration)
+	for (;;)
 	{
 		// Sort population by cost ------------------------------------------------------
 		auto scoredPopulation = std::vector<std::pair<double, Sequence>>();
@@ -238,13 +238,28 @@ auto CrossEntropy(const int sequenceLength) -> void
 		{
 			if (shuntAttempts > 0)
 			{
-				for (auto & distribution : distributions)
+				if (shuntAttempts % 10 == 0)
 				{
-					if (rand() % 100 > 30)
+					for (auto & distribution : distributions)
 					{
-						const auto randMean = Randf(-1, 0);
-						const auto randSDev = Randf(1, 3);
-						distribution.UpdateParameters(randMean, randSDev);
+						if (rand() % 100 > 80)
+						{
+							const auto randMean = Randf(-1, 0);
+							const auto randSDev = Randf(1, 3);
+							distribution.UpdateParameters(randMean, randSDev);
+						}
+					}
+				} 
+				else
+				{
+					for (auto & distribution : distributions)
+					{
+						if (rand() % 100 > 40)
+						{
+							const auto randMean = Randf(-1, 0);
+							const auto randSDev = Randf(1, 3);
+							distribution.UpdateParameters(randMean, randSDev);
+						}
 					}
 				}
 
@@ -275,7 +290,7 @@ auto CrossEntropy(const int sequenceLength) -> void
 
 int main()
 {
-	CrossEntropy(100);
+	CrossEntropy(55);
     return 0;
 }
 
