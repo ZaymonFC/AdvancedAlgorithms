@@ -93,7 +93,7 @@
 
     \par The Lennard-Jones or "L-J potential" is simple mathematical approximation of the strength of interaction between a pair of neutrally charges atoms. As the distance between two neutrally charged similar atoms converges to 0 atoms experience Exchange Interaction or Pauli repulsion due to overlapping electron orbitals. The L-J Potential is an effective approximation commonly used as it reliably approximates energies at short and long distances. The L-J Potential is also used due to the computational simplicity since $r_{ij}^{12}$ can be expressed as the square of $r_{ij}^6$.
     
-    \par For a molecule configuration to be stable it must be in a state of minimum energy. If the molecule is not in a configuration that results in minimum energy the configuration of that molecule would be transient in the physical sense as atom pairs throughout the molecule will be repelled and attracted. To calculate the total energy in a molecule configuration the summation of each atom pair's energy contribution is calculated. This is expressed by:
+    \par For a molecule configuration to be stable it must be in a state of minimum energy. If the molecule is not in a configuration that results in minimum energy the configuration of that molecule will not be static as atom pairs throughout the molecule will be repelling and attracting each other. To calculate the total energy in a molecule configuration the summation of each atom pair's energy contribution is calculated. This is expressed by:
     \begin{equation}
         V = \sum_{i < j}^{N}(\frac{1}{r^{12}} - \frac{2}{r^{6}})
     \end{equation}
@@ -117,12 +117,11 @@
         \item The vector of angles is a simpler representation of the problem and the change in energy for the cluster relative to the change in any $\alpha_{i}$ can be determined.
     \end{enumerate}
 
+    Developing and experimenting with a simplified model leads to the development of techniques which can be extended and applied to more complicated and realistic models such as atom configurations in 3 dimensions. The possibilities for extending on this research
     
-    \clearpage
     \section{Literature Review}
     \subsection{BFGS}
-    The Broyden-Fletcher-Goldfarb-Shanno algorithm is an iterative method under the quasi-Newton class of hill climbing algorithms. "Quasi-Newton methods, like steepest descent, require only the gradient of the objective function to be supplied at each iteration" \cite{numericalOptimization}
-    The BFGS algorithm will never make a step in the `uphill' direction. To effectively make use of BFGS in problem spaces with local minima BFGS needs to be used as the optimization step in a higher level optimization algorithm such as a genetic population based search.
+    The Broyden-Fletcher-Goldfarb-Shanno algorithm is an iterative method under the quasi-Newton class of hill climbing algorithms. "Quasi-Newton methods, like steepest descent, require only the gradient of the objective function to be supplied at each iteration" \cite{numericalOptimization} The BFGS algorithm will never make a step in the `uphill' direction. To effectively make use of BFGS in problem spaces with local minima BFGS needs to be used as the optimization step in a higher level optimization algorithm such as a genetic population based search.
 
     \subsection{Cross-Entropy Method}
     The Cross-Entropy method is a generic approach to solving complicated optimization problems such as Max Cut or the travelling salesman problem. "the CE method... defines a precise mathematical frame-work for deriving fast, and in some sense "optimal" updating/learning rules..." \cite{CE}. The core algorithm of the CE method is quite a simple iterative process:
@@ -141,11 +140,20 @@
     \subsection{Cross Entropy Optimization}
     \subsubsection{Pseudocode}
     \lstinputlisting[language=python]{Code/CE.py}
-    
-    \clearpage
-    \subsection{BFGS and Genetic Search}
-    \subsubsection{Pseudocode}
-    \lstinputlisting[language=python]{Code/BFGS.py}
+
+    \subsubsection{Experimentation and Design: Parameters and Operators}
+    While implementing and developing this approach various parameters and operators were experimented with in order to increase the effectiveness of the algorithm. Parameters such as:
+    \begin{itemize}
+        \item Population size
+        \item Elite sample percentage
+        \item Epsilon before scrambling
+        \item Number of scramble attempts
+    \end{itemize}
+    were tuned and refined to give the best results.
+    % \clearpage
+    % \subsection{BFGS and Genetic Search}
+    % \subsubsection{Pseudocode}
+    % \lstinputlisting[language=python]{Code/BFGS.py}
 
     \clearpage
     \subsection{Cross Entropy Method to Generate Optimization Candidates for BFGS}
@@ -158,6 +166,9 @@
         \item Update the distribution vector based on the pre-optimized sequences which correspond to the sequences in the elite sample of the optimized population.
         \item Goto step 1.
     \end{enumerate}
+
+    \subsubsection{Experimentation, Parameters and Operators}
+    Throughout the development and experimentation with the proposed algorithms various operators and methods were considered in order to increase the effectiveness of the algorithm.
     
     
     % %

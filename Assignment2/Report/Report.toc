@@ -8,8 +8,8 @@
 \contentsline {section}{\numberline {3}Algorithm Description}{6}
 \contentsline {subsection}{\numberline {3.1}Cross Entropy Optimization}{6}
 \contentsline {subsubsection}{\numberline {3.1.1}Pseudocode}{6}
-\contentsline {subsection}{\numberline {3.2}BFGS and Genetic Search}{7}
-\contentsline {subsubsection}{\numberline {3.2.1}Pseudocode}{7}
-\contentsline {subsection}{\numberline {3.3}Cross Entropy Method to Generate Optimization Candidates for BFGS}{8}
-\contentsline {subsubsection}{\numberline {3.3.1}High level algorithm}{8}
+\contentsline {subsubsection}{\numberline {3.1.2}Experimentation and Design: Parameters and Operators}{6}
+\contentsline {subsection}{\numberline {3.2}Cross Entropy Method to Generate Optimization Candidates for BFGS}{8}
+\contentsline {subsubsection}{\numberline {3.2.1}High level algorithm}{8}
+\contentsline {subsubsection}{\numberline {3.2.2}Experimentation, Parameters and Operators}{8}
 \contentsline {section}{References}{9}

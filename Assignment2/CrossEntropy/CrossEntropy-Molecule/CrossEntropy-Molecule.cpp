@@ -159,13 +159,13 @@ bool pairCompair(const std::pair<double, Sequence> & firstElement, const std::pa
 	return firstElement.first < secondElement.first;
 }
 
-auto CrossEntropy(const int sequenceLength) -> void
+auto CrossEntropy(const int sequenceLength, const double eliteDistribution) -> double
 {
-	auto shuntAttempts = 30;
+	auto shuntAttempts = 10;
 	// Parameters of cross entropy method
-	const auto populationSize = 1250;
+	const auto populationSize = 1000;
 	const auto parameterBlend = 0.95;
-	const auto eliteDistribution = 0.15;
+//	const auto eliteDistribution = 0.15;
 
 	auto distributions = std::vector<WeightedDistribution>(sequenceLength, {0, 3});
 
@@ -269,10 +269,10 @@ auto CrossEntropy(const int sequenceLength) -> void
 			{
 				printf("\Surpased Epsilon\n");
 				printf("N: %d Best Score Found: %lf\n", sequenceLength, bestScore);
-				bestSequence.WriteFile("Molecule.txt");
+//				bestSequence.WriteFile("Molecule.txt");
 				//				system("python ./DrawMolecule");
 
-				break;
+				return bestScore;
 			}
 		}
 
@@ -290,7 +290,26 @@ auto CrossEntropy(const int sequenceLength) -> void
 
 int main()
 {
-	CrossEntropy(55);
+	auto scores = std::vector<std::pair<double, double>>();
+	for (auto elite = 0.01; elite <= 0.20; elite = elite + 0.01)
+	{
+		for (auto i = 0; i < 3; i++)
+		{
+			scores.emplace_back(elite, CrossEntropy(40, elite));
+			printf("\n\n\n\n |||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+			printf("\t FINISHED FOR PARAM %d", elite);
+			printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||\n\n\n\n ");
+		}
+	}
+
+	std::ofstream fp("elite scores.txt");
+
+	for (const auto pair : scores)
+	{
+		fp << pair.first << ',' << pair.second << std::endl;
+	}
+	fp.close();
+
     return 0;
 }
 

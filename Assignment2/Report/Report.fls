@@ -1,6 +1,6 @@
-PWD c:/Users/Zaymon/Projects/University/Algorithms Assignment
+PWD c:/Users/Zaymon/Projects/University/AdvancedAlgorithms/Assignment2/Report
 INPUT C:/Users/Zaymon/AppData/Local/MiKTeX/2.9/miktex/data/le/pdftex/pdflatex.fmt
-INPUT c:/Users/Zaymon/Projects/University/Algorithms Assignment/Report.tex
+INPUT c:/Users/Zaymon/Projects/University/AdvancedAlgorithms/Assignment2/Report/Report.tex
 OUTPUT Report.log
 INPUT C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/article.cls
 INPUT C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/article.cls
@@ -420,6 +420,7 @@ INPUT C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/fourier
 INPUT C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/tex/latex/fourier/ts1futs.fd
 INPUT C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/tex/latex/fourier/ts1futs.fd
 INPUT C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/fourier/futr8c.tfm
+INPUT C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/fourier/futr8c.tfm
 INPUT C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/fonts/vf/public/fourier/futr8t.vf
 INPUT C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/fourier/futr8r.tfm
 INPUT C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/fourier/fourier-alt.tfm
@@ -434,9 +435,8 @@ INPUT C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/fourier
 INPUT C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/fourier/fourier-alt-ita.tfm
 INPUT C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/fonts/vf/public/fourier/futr8c.vf
 INPUT C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/fourier/fourier-orns.tfm
-INPUT Code/BFGS.py
-INPUT Code/BFGS.py
-INPUT Code/BFGS.py
+INPUT C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/fonts/vf/public/fourier/futr8c.vf
+INPUT C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/fourier/fourier-orns.tfm
 INPUT Report.bbl
 INPUT Report.bbl
 INPUT C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/fourier/futri8t.tfm
