@@ -33,8 +33,11 @@ ALGORITHM CrossEntropy (sequenceLength):
         
         # Check exit conditions
         if (diff < epsilon):
-            print bestScore
-            break
+            if (restartAttemptsRemaining):
+                performPartialReset()
+            else:
+                print bestScore
+                break
         
         # Generate new Population
         population = generatePopulation(populationSize, distributions)

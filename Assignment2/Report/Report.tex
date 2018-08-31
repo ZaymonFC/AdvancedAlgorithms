@@ -51,13 +51,13 @@
 \begin{document}
 
 \title{Cross Entropy Method and BFGS for Optimization of 2-Dimensional Bonded-Molecule Clusters}
-\author{\IEEEauthorblockN{Zaymon Foulds-Cook}
-\IEEEauthorblockA{Griffith University School of ICT}}
+\author{\IEEEauthorblockN{Zaymon Foulds-Cook s5017391}
+\IEEEauthorblockA{Griffith University School of Information Communication Technology}}
 
 \maketitle
 
 \begin{abstract}
-    Experimental findings here
+    This paper defines a real coded implementation of the Cross Entropy Optimization Method as both a local and global optimizer in order to find optimal low energy configurations of bonded 2-dimensional molecules. The algorithm was able to find optimum and near optimum values for molecules of up to length 20 and found configurations within 5-15\% of the optimum for larger molecules up to a length of 55.
 \end{abstract}
 
 %
@@ -81,8 +81,8 @@ where
                 domain=0.75:5,
                 ymax=5,
                 samples=100,
-                xlabel=Displacement,
-                ylabel=Energy
+                xlabel=r,
+                ylabel=V(r)
             ]
             \addplot[red] {(1/x^12) - (2/x^6)};
         \end{axis}
@@ -92,6 +92,7 @@ where
 \end{figure}
 
 \par The Lennard-Jones or "L-J potential" is simple mathematical approximation of the strength of interaction between a pair of neutrally charges atoms. As the distance between two neutrally charged similar atoms converges to 0 atoms experience Exchange Interaction or Pauli repulsion due to overlapping electron orbitals. The L-J Potential is an effective approximation commonly used as it reliably approximates energies at short and long distances. The L-J Potential is also used due to the computational simplicity since $r_{ij}^{12}$ can be expressed as the square of $r_{ij}^6$.
+
 
 \par For a molecule to be in a stable configuration it must exist in a state of minimum energy. If the molecule is not in a configuration that results in minimum energy the configuration of that molecule would be transient  as atom pairs throughout the molecule will be repelled and attracted. To calculate the total energy in a molecule configuration the summation of each atom pair's energy contribution is calculated. This is expressed by:
 \begin{equation}
@@ -112,16 +113,16 @@ The problem can be represented by a vector of angles $\alpha_{0} ... \alpha_{N-2
 
 There are several distinct advantages to this approach compared to using cartesian coordinates:
 \begin{enumerate}
-    \item Specifying the angles removes the need to recalculate the positions of atoms after a change (as the angles are relative).
-    \item The cartesian coordinates can be obtained for any atom via trigonometry.
-    \item The vector of angles is a simpler representation of the problem and the change in energy for the cluster relative to the change in any $\alpha_{i}$ can be determined.
+    \item Defining the bonded-molecule in terms of bond angles removes the need to recalculate the positions of atoms after a change (as the angles are relative).
+    \item The cartesian coordinates can be obtained for any atom quickly via trigonometry.
+    \item The vector of angles is a mathematically simpler representation of the problem and the change in energy for the cluster relative to the change in any angle can be determined.
 \end{enumerate}
-
+\par Representing chain molecules as 2-dimensional bonded molecules reduces the complexity of the model and also acts as a intermediary for developing algorithms that can optimize the configuration of molecules in 3 dimensions.
 
 \section{Literature Review}
 \subsection{BFGS}
-The Broyden-Fletcher-Goldfarb-Shanno algorithm is an iterative method under the quasi-Newton class of hill climbing algorithms. "Quasi-Newton methods, like steepest descent, require only the gradient of the objective function to be supplied at each iteration" \cite{numericalOptimization}
-The BFGS algorithm will never make a step in the `uphill' direction. To effectively make use of BFGS in problem spaces with local minima BFGS needs to be used as the local optimization step in a higher level global optimization algorithm such as a genetic population based search.
+\par The Broyden-Fletcher-Goldfarb-Shanno algorithm is an iterative method under the Quasi-Newton class of hill climbing algorithms. "Quasi-Newton methods, like steepest descent, require only the gradient of the objective function to be supplied at each iteration" \cite{numericalOptimization} 
+\par Quasi-Newton methods are second order methods which use information about the derivative and second derivative of the function. BFGS is not an exact method as it approximates the Hessian using the differences in gradients over several iterations. The BFGS algorithm will never make a step in the `uphill' direction. To effectively make use of BFGS in problem spaces with local minima BFGS needs to be used as the local optimization step in a higher level global optimization algorithm such as a genetic population based search. 
 
 \subsection{Cross-Entropy Method}
 The Cross-Entropy method is a generic approach to solving complicated optimization problems such as Max Cut or the travelling salesman problem. "the CE method... defines a precise mathematical frame-work for deriving fast, and in some sense "optimal" updating/learning rules..." \cite{CE}. The core algorithm of the CE method is quite a simple iterative process:
@@ -130,11 +131,9 @@ The Cross-Entropy method is a generic approach to solving complicated optimizati
     \item Score the sample and take an elite sub-sample of the resulting population.
     \item Use the values of the elite sub sample to update the parameters of the random mechanism to produce a "better" sample on the next iteration.
 \end{enumerate}
-The random mechanism can be as simple as specifying a random distribution for each element in the vector to be optimized (in this case the vector of angles) where the mean and standard deviation are changed to reflect the elite sample.
-\\\\
-Specifying a smoothing parameter can be useful \cite{CE2}. The smoothing parameter determines the ratio of blending between the old and new distribution parameters. This smoothing parameter $\lambda$ can either be a static value $0 \leq \lambda \leq 1$ or dynamically changed as a function of time, score or another heuristic.
+\par The random mechanism can be as simple as specifying a parametric family of random distributions of the same length as the vector to be optimized (in this case the vector of angles) where the mean and standard deviation of each element in the parametric family are changed to reflect the elite sample after each generation. 
+\par Specifying a smoothing parameter can be useful \cite{CE2}. The smoothing parameter determines the ratio of blending between the old and new distribution parameters. This smoothing parameter $\lambda$ can either be a static value $0 \leq \lambda \leq 1$ or dynamically changed as a function of time, score or another heuristic.
 
-\newpage
 \section{Algorithm Description}
 \subsection{Cross Entropy Optimization}
 \subsubsection{Pseudocode}
@@ -198,12 +197,22 @@ The size of the molecule is set to N=40.
 \end{figure}
 \par Figure \ref{ce blending} shows a very clear downward trend which suggests that the ideal amount of parameter blending is minimal. Parameter blending in the range of 85-95\% gives the best results.
 
-\subsection{Ideal Parameters - BFGS}
-\par After parameter optimization for the CE method the same parameters were used to achieve the best results when combining the CE Method with BFGS. The exception to this was population size, as the BFGS optimization step is computationally intensive due to the calculation of energy gradients the population size had to be decreased to 300 in order to speed up the algorithm and allow the global CE Optimizer to explore multiple minima without time constraint.
+\subsection{Ideal Parameters - CE and BFGS}
+\par After parameter optimization for the CE method the same parameters were used to achieve the best results when combining the CE Method with BFGS with the exception of population size. The BFGS optimization step is computationally intensive due to the calculation of energy gradients (see Appendix A) and the population size had to be decreased to 300 in order to speed up the algorithm and allow the global CE Optimizer to explore multiple minima without time constraint.
 
 \section{Partial Restarting and Local Minima Hopping Methods}
-As the CE Method will slowly converge on a local minima different partial restart operators were tested in order to hop to other potentially better minima.
+\par As the CE Method will slowly converge on a local minima, different partial restart operators were tested in order to hop to other potentially better minima. Do detect the convergence to a local minima the algorithm compares the difference between the best score of the current population and the best score of the previous population. If this value becomes smaller than $\epsilon$ then the algorithm has converged and the optimizer will either return the result or partially reset. After convergence all generated members of the population with be representative of the distributions narrowed parameters (as the distribution's standard deviation parameter will narrow to near 0).
 
+\subsection{Partial Random Reset}
+After the algorithm reaches a certain $\epsilon$ each member of the parametric family has a certain percentage chance of being reset to the default distribution parameters.
+
+\subsection{Partial Tail Reset}
+After the algorithm reaches a certain $\epsilon$ a random number N is rolled and N distributions from the end of the parametric family are reset to default parameters.
+
+\subsection{Gradient Ranked Partial Reset}
+After the algorithm reaches a certain $\epsilon$ it calculates the gradient change in energy for each angle relative to the total energy of the cluster (see Appendix A). The gradients are then sorted by magnitude. The distributions corresponding to the greatest gradients are then reset in an attempt to introduce the most change in energy over subsequent generations while maintaining the general structure of the molecule.
+
+\newpage
 \section{Algorithm Performance}
 \subsection{CE - Scores}
 \begin{table}[!ht]
@@ -276,10 +285,12 @@ As the CE Method will slowly converge on a local minima different partial restar
     \label{BFGSCE_RESULTS}
 \end{table}
 
+\newpage
 \section{Results}
-
+The Cross Entropy Method was able to find near optimal values for values of N up to 20 and then configurations with scores within 5-15\% of the optimal values. The combination of the CE Method and BFGS yielded worse results do to the increased computational complexity and a lack of a strong driving force for global convergence.
 
 \section{Conclusion}
+Although the Cross Entropy Method (both as a local and global optimizer) was an ideal candidate to apply to the Bonded-Molecule problem the lack of ability to perform minima hopping in this implementation resulted in the algorithm not finding global minima for many lengths of molecules.
 
 \clearpage
 \bibliographystyle{apacite}
