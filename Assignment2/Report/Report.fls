@@ -491,6 +491,18 @@ INPUT C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/fourier
 INPUT Code/BFGS.py
 INPUT Code/BFGS.py
 INPUT Code/BFGS.py
+INPUT images/CE_population.pdf
+INPUT ./images/CE_population.pdf
+INPUT ./images/CE_population.pdf
+INPUT ./images/CE_population.pdf
+INPUT images/CE_elitesample.pdf
+INPUT ./images/CE_elitesample.pdf
+INPUT ./images/CE_elitesample.pdf
+INPUT ./images/CE_elitesample.pdf
+INPUT images/CE_blending.pdf
+INPUT ./images/CE_blending.pdf
+INPUT ./images/CE_blending.pdf
+INPUT ./images/CE_blending.pdf
 INPUT C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/fourier/futrc8t.tfm
 INPUT C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/fonts/vf/public/fourier/futrc8t.vf
 INPUT C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/fourier/futr8r.tfm
