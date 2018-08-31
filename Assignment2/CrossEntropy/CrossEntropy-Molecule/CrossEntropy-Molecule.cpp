@@ -112,17 +112,25 @@ public:
 	auto EvaluateCost() -> double
 	{
 		auto positions = CalculatePositions();
-		auto cost = 0.0;
+		auto cost = -1.0;
 
 		for (auto i = 0; i < length; ++i)
 		{
+			const auto p_i = positions.at(i);
+			const auto x = p_i.x;
+			const auto y = p_i.y;
+
 			for (auto j = i + 1; j < length; j++)
 			{
-				const auto p_i = positions.at(i);
 				const auto p_j = positions.at(j);
-				const auto r_ij_sqr = abs(pow(p_j.x - p_i.x, 2) + pow(p_j.y - p_i.y, 2));
-				
-				cost += 1 / pow(r_ij_sqr, 6) - 2 / pow(r_ij_sqr, 3);
+				const auto dx = p_j.x - x;
+				const auto dy = p_j.y - y;
+
+				const auto r_ij_2 = 1.0 / (dx * dx + dy * dy);
+				const auto r_ij_6 = r_ij_2 * r_ij_2 * r_ij_2;
+				const auto r_ij_12 = r_ij_6 * r_ij_6;
+
+				cost += r_ij_12 - 2 * r_ij_6;
 			}
 		}
 		return cost;
@@ -159,13 +167,13 @@ bool pairCompair(const std::pair<double, Sequence> & firstElement, const std::pa
 	return firstElement.first < secondElement.first;
 }
 
-auto CrossEntropy(const int sequenceLength, const double eliteDistribution) -> double
+auto CrossEntropy(const int sequenceLength) -> double
 {
 	auto shuntAttempts = 10;
 	// Parameters of cross entropy method
-	const auto populationSize = 1000;
+	const auto populationSize = 1300;
 	const auto parameterBlend = 0.95;
-//	const auto eliteDistribution = 0.15;
+	const auto eliteDistribution = 0.13;
 
 	auto distributions = std::vector<WeightedDistribution>(sequenceLength, {0, 3});
 
@@ -269,7 +277,7 @@ auto CrossEntropy(const int sequenceLength, const double eliteDistribution) -> d
 			{
 				printf("\Surpased Epsilon\n");
 				printf("N: %d Best Score Found: %lf\n", sequenceLength, bestScore);
-//				bestSequence.WriteFile("Molecule.txt");
+				bestSequence.WriteFile("Molecule.txt");
 				//				system("python ./DrawMolecule");
 
 				return bestScore;
@@ -291,18 +299,18 @@ auto CrossEntropy(const int sequenceLength, const double eliteDistribution) -> d
 int main()
 {
 	auto scores = std::vector<std::pair<double, double>>();
-	for (auto elite = 0.01; elite <= 0.20; elite = elite + 0.01)
+	for (auto N = 4; N <= 55; ++N)
 	{
 		for (auto i = 0; i < 3; i++)
 		{
-			scores.emplace_back(elite, CrossEntropy(40, elite));
+			scores.emplace_back(N, CrossEntropy(N));
 			printf("\n\n\n\n |||||||||||||||||||||||||||||||||||||||||||||||||||||||");
-			printf("\t FINISHED FOR PARAM %d", elite);
+			printf("\t FINISHED FOR PARAM %d", N);
 			printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||\n\n\n\n ");
 		}
 	}
 
-	std::ofstream fp("elite scores.txt");
+	std::ofstream fp("CE final scores.txt");
 
 	for (const auto pair : scores)
 	{
