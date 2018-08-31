@@ -112,7 +112,8 @@ public:
 	auto EvaluateCost() -> double
 	{
 		auto positions = CalculatePositions();
-		auto cost = -1.0;
+		// Account for all the bonds
+		double cost = -(length - 1);
 
 		for (auto i = 0; i < length; ++i)
 		{
@@ -120,7 +121,8 @@ public:
 			const auto x = p_i.x;
 			const auto y = p_i.y;
 
-			for (auto j = i + 1; j < length; j++)
+			// Value immediately infront of i is accounted for hence j = i+2
+			for (auto j = i + 2; j < length; j++)
 			{
 				const auto p_j = positions.at(j);
 				const auto dx = p_j.x - x;

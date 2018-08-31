@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 plt.style.use('fast')
 import numpy as np
 
-filename = 'ce final scores.txt'
+filename = 'ce final scores new.txt'
 data = defaultdict(list)
 
 with open(filename, 'r') as fp:
@@ -19,7 +19,7 @@ with open(filename, 'r') as fp:
 
 with open(filename[:-4] + ' output', 'w') as fp:
     for k, v in data.items():
-        fp.write(str(k) + '\t' + str(max(v)))
+        fp.write(str(k) + '\t' + str(min(v)))
         fp.write('\n')
 
 
