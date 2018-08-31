@@ -1,0 +1,2 @@
+CrossEntropy: g++ -std=c++17 -O3 CrossEntropy-Molecule.cpp
+CE_BFGS: g++ -std=c++17 -O3 -I ./includeLinux CE_BFGS.cpp
