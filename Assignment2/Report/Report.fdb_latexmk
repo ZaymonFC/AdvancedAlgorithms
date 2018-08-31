@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex Report"] 1535714452 "Report.aux" "Report.bbl" "Report" 1535714770
+["bibtex Report"] 1535716595 "Report.aux" "Report.bbl" "Report" 1535716994
   "C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/bibtex/bst/apacite/apacite.bst" 1374952728 146156 9d7b79dbf9d91133318126032cff8c27 ""
-  "Report.aux" 1535714769 4537 867dd39988e0e26a9780456297e90802 ""
+  "Report.aux" 1535716993 4535 7d4f58ef1ca197008735b43530b6bcf5 ""
   "bib.bib" 1532682940 897 5aec52eb00b4262f52d1c06ae9bfa9a8 ""
   (generated)
   "Report.blg"
   "Report.bbl"
-["pdflatex"] 1535714765 "c:/Users/Zaymon/Projects/University/AdvancedAlgorithms/Assignment2/Report/Report.tex" "Report.pdf" "Report" 1535714770
+["pdflatex"] 1535716989 "c:/Users/Zaymon/Projects/University/AdvancedAlgorithms/Assignment2/Report/Report.tex" "Report.pdf" "Report" 1535716994
   "C:/Users/Zaymon/AppData/Local/MiKTeX/2.9/fonts/tfm/public/rsfs/rsfs10.tfm" 1527948260 688 37338d6ab346c2f1466b29e195316aa4 ""
   "C:/Users/Zaymon/AppData/Local/MiKTeX/2.9/fonts/tfm/public/rsfs/rsfs5.tfm" 1527948263 684 3a51bd4fd9600428d5264cf25f04bb9a ""
   "C:/Users/Zaymon/AppData/Local/MiKTeX/2.9/fonts/tfm/public/rsfs/rsfs7.tfm" 1527948262 692 1b6510779f0f05e9cbf03e0f6c8361e6 ""
@@ -244,15 +244,15 @@
   "C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/tex/latex/tools/tabularx.sty" 1492423193 7370 64e8a94c3d083215654cd9a5b9dcc136 ""
   "C:/Users/Zaymon/AppData/Local/Programs/MiKTeX 2.9/tex/latex/xcolor/xcolor.sty" 1463135581 57049 34128738f682d033422ca125f82e5d62 ""
   "Code/CE.py" 1535711614 1581 b6552025865431d4cf2c3f63ee3e3474 ""
-  "Report.aux" 1535714769 4537 867dd39988e0e26a9780456297e90802 ""
-  "Report.bbl" 1535714452 2152 db96e5ac6a184d60ecd1f2d40dd04a8e "bibtex Report"
-  "Report.tex" 1535714765 22645 fe8bd1f06e9dd86ca85795332e2ee922 ""
-  "c:/Users/Zaymon/Projects/University/AdvancedAlgorithms/Assignment2/Report/Report.tex" 1535714765 22645 fe8bd1f06e9dd86ca85795332e2ee922 ""
+  "Report.aux" 1535716993 4535 7d4f58ef1ca197008735b43530b6bcf5 ""
+  "Report.bbl" 1535716596 2152 db96e5ac6a184d60ecd1f2d40dd04a8e "bibtex Report"
+  "Report.tex" 1535716988 22645 e8ff4556fd78a80ba229414aac04d5cd ""
+  "c:/Users/Zaymon/Projects/University/AdvancedAlgorithms/Assignment2/Report/Report.tex" 1535716988 22645 e8ff4556fd78a80ba229414aac04d5cd ""
   "images/CE_blending.pdf" 1535626628 14792 dbebb31146bbdad6ea35e31e50675b3d ""
   "images/CE_elitesample.pdf" 1535626522 14290 bcae6388ac749880f02387c71843957a ""
   "images/CE_population.pdf" 1535627547 14982 0417163430cc34246f7e2734829ba857 ""
   "images/configuration.png" 1532673961 18932 0c87ca2cedc3a5979c83555eef7676fd ""
   (generated)
+  "Report.pdf"
   "Report.log"
   "Report.aux"
-  "Report.pdf"

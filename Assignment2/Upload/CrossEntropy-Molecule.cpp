@@ -1,6 +1,5 @@
 // CrossEntropy-Molecule.cpp : Defines the entry point for the console application.
 //
-#include "stdafx.h"
 #include <vector>
 #include <random>
 #include <iostream>
@@ -8,6 +7,7 @@
 #include <chrono>
 #include <fstream>
 #include <thread>
+#include <algorithm>
 
 #define PI 3.141592653589793238
 
@@ -38,7 +38,7 @@ public:
 
 	auto UpdateParameters(const double mean, const double standardDeviation, const double parameterBlend = 1) -> void
 	{
-		const auto keepPercentage = 1 - parameterBlend;
+		const auto keepPercentage = 1.0 - parameterBlend;
 		this->mean = keepPercentage * this->mean + parameterBlend * mean;
 		this->standardDeviation = keepPercentage * this->standardDeviation + parameterBlend * standardDeviation;
 
@@ -132,7 +132,7 @@ public:
 				const auto r_ij_6 = r_ij_2 * r_ij_2 * r_ij_2;
 				const auto r_ij_12 = r_ij_6 * r_ij_6;
 
-				cost += r_ij_12 - 2 * r_ij_6;
+				cost += r_ij_12 - 2.0 * r_ij_6;
 			}
 		}
 		return cost;
@@ -171,7 +171,7 @@ bool pairCompair(const std::pair<double, Sequence> & firstElement, const std::pa
 
 auto CrossEntropy(const int sequenceLength) -> double
 {
-	auto shuntAttempts = 10;
+	auto shuntAttempts = 15;
 	// Parameters of cross entropy method
 	const auto populationSize = 1300;
 	const auto parameterBlend = 0.95;
@@ -205,8 +205,8 @@ auto CrossEntropy(const int sequenceLength) -> double
 		std::sort(scoredPopulation.begin(), scoredPopulation.end(), pairCompair);
 
 		
-		const auto diff = abs(lastBest - scoredPopulation.at(0).first);
-		printf("Score: %lf | Diff: %lf\n", scoredPopulation.at(0).first, diff);
+		const double diff = std::abs(lastBest - scoredPopulation.at(0).first);
+		printf("Score: %lf\tDiff: %lf\n", scoredPopulation.at(0).first, diff);
 
 		lastBest = scoredPopulation.at(0).first;
 
@@ -219,8 +219,6 @@ auto CrossEntropy(const int sequenceLength) -> double
 		// Update distribution parameters (mean, std deviation) for each angle based ----
 		// off the values of the elite sample
 		
-		// Loop through each angle
-#pragma loop(hint_parallel(8))
 		for (auto angle = 0; angle < sequenceLength; ++angle)
 		{
 			auto values = std::vector<double>();
@@ -235,10 +233,10 @@ auto CrossEntropy(const int sequenceLength) -> double
 			const auto sum = std::accumulate(values.begin(), values.end(), 0.0);
 			const auto mean = sum / values.size();
 
-			auto diff = std::vector<double>(values.size());
-			std::transform(values.begin(), values.end(), diff.begin(), [mean](double x) {return x - mean; });
+			auto diff_mean = std::vector<double>(values.size());
+			std::transform(values.begin(), values.end(), diff_mean.begin(), [mean](double x) {return x - mean; });
 			
-			const auto sq_sum = std::inner_product(diff.begin(), diff.end(), diff.begin(), 0.0);
+			const auto sq_sum = std::inner_product(diff_mean.begin(), diff_mean.end(), diff_mean.begin(), 0.0);
 			const auto standardDeviation = std::sqrt(sq_sum / values.size());
 
 			distributions.at(angle).UpdateParameters(mean, standardDeviation, parameterBlend);
@@ -277,7 +275,7 @@ auto CrossEntropy(const int sequenceLength) -> double
 			}
 			else
 			{
-				printf("\Surpased Epsilon\n");
+				printf("\nSurpased Epsilon\n");
 				printf("N: %d Best Score Found: %lf\n", sequenceLength, bestScore);
 				bestSequence.WriteFile("Molecule.txt");
 				//				system("python ./DrawMolecule");
@@ -298,30 +296,14 @@ auto CrossEntropy(const int sequenceLength) -> double
 }
 
 
-int main()
+int main(int argc, char ** argv)
 {
-//	auto scores = std::vector<std::pair<double, double>>();
-//	for (auto N = 4; N <= 55; ++N)
-//	{
-//		for (auto i = 0; i < 3; i++)
-//		{
-//			scores.emplace_back(N, CrossEntropy(N));
-//			printf("\n\n\n\n |||||||||||||||||||||||||||||||||||||||||||||||||||||||");
-//			printf("\t FINISHED FOR PARAM %d", N);
-//			printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||\n\n\n\n ");
-//		}
-//	}
-//
-//	std::ofstream fp("CE final scores.txt");
-//
-//	for (const auto pair : scores)
-//	{
-//		fp << pair.first << ',' << pair.second << std::endl;
-//	}
-//	fp.close();
-
-	CrossEntropy(55);
-
+	if (argc != 2) {
+		std::cout << "Please enter the correct commandline arguments" << std::endl;
+		return -1;
+	}
+	
+	CrossEntropy(atoi(argv[1]));
     return 0;
 }
 

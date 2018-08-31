@@ -214,7 +214,7 @@ After the algorithm reaches a certain $\epsilon$ it calculates the gradient chan
 
 \newpage
 \section{Algorithm Performance}
-\subsection{CE - Scores}
+\subsection{CE Method}
 \begin{table}[!ht]
     \begin{tabularx}{\columnwidth}{XXXXXX}
     N  & Optimal & Best Found & N  & Optimal & Best Found \\ \hline
@@ -361,6 +361,7 @@ Combining the terms we have
 \begin{equation}
     \frac{\partial V}{\partial \alpha m} = -12 \sum_{i=0}^{m-1}\sum_{j=m+1}^{n}(\frac{1}{r_{ij}^{14}} - \frac{1}{r_{ij}^{8}})((x_{i}-x_{j})(y_{m}-y_{i})+(y_{i}-y_{j})(x_{j}-x_{m}))
 \end{equation}
+
 %
 % ─── END ────────────────────────────────────────────────────────────────────────
 %
