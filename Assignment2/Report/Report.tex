@@ -50,7 +50,7 @@
 
 \begin{document}
 
-\title{Cross Entropy Method and BFGS for Optimization of 2-Dimensional Lennard-Jones Clusters}
+\title{Cross Entropy Method and BFGS for Optimization of 2-Dimensional Bonded-Molecule Clusters}
 \author{\IEEEauthorblockN{Zaymon Foulds-Cook}
 \IEEEauthorblockA{Griffith University School of ICT}}
 
@@ -65,10 +65,8 @@
 %   
 \section{Introduction}
 \subsection{Problem Statement}
-\par
-Linear polymers or chain molecules are molecules that exist in the natural world that are linear sequences of bonded atoms where each atom $k$ within the molecule (excluding terminal atoms) is only bonded to atoms $k_{k - 1}$ and $k_{k + 1}$. According to Valence-Shell Electron-Pair Repulsion Theory all atoms in a molecule interact with all other atoms regardless of whether the atoms are explicitly bound together through chemical bonds.
-\\\\
-The energy of the interaction between two atoms is a function of the displacement between then and is given by the Lennard-Jones potential:
+\par Linear polymers or chain molecules are molecules that exist in the natural world that are linear sequences of bonded atoms where each atom $k$ within the molecule (excluding terminal atoms) is only bonded to atoms $k_{k - 1}$ and $k_{k + 1}$. According to Valence-Shell Electron-Pair Repulsion Theory all atoms in a molecule interact with all other atoms regardless of whether the atoms are explicitly bound together through chemical bonds.
+\par The energy of the interaction between two atoms is a function of the displacement between then and is given by the Lennard-Jones potential:
 \begin{equation}
     V = (\frac{1}{r^{12}} - \frac{2}{r^{6}})
 \end{equation}
@@ -142,14 +140,14 @@ Specifying a smoothing parameter can be useful \cite{CE2}. The smoothing paramet
 \subsubsection{Pseudocode}
 \lstinputlisting[language=python]{Code/CE.py}
 
-\newpage
-\subsection{BFGS and Genetic Search}
-\subsubsection{Pseudocode}
-\lstinputlisting[language=python]{Code/BFGS.py}
+% \newpage
+% \subsection{BFGS and Genetic Search}
+% \subsubsection{Pseudocode}
+% \lstinputlisting[language=python]{Code/BFGS.py}
 
+\newpage
 \subsection{Cross Entropy Method to Generate Optimization Candidates for BFGS}
 \par An experiment to use the Cross Entropy Method as the global optimizer in order to generate optimization candidates for BFGS. Conceptually this method will allow the Cross Entropy Method to optimize the distribution vector to generate good candidates for BFGS optimization.
-\subsubsection{High level algorithm}
 \begin{enumerate}
     \item Generate Population using distribution vector.
     \item Run BFGS on population members, generating an additional optimized population.
@@ -158,33 +156,55 @@ Specifying a smoothing parameter can be useful \cite{CE2}. The smoothing paramet
     \item Goto step 1.
 \end{enumerate}
 
+The implementation of the algorithm is the same as the CE Method except the sequences generated are scored after a BFGS optimization step.
+
 \section{Parameter Tuning}
-\par 
+\par The three configurable parameters for this implementation of the CE Method are:
+\begin{itemize}[topsep=0pt]
+    \item Population size
+    \item Parameter blending
+    \item Elite sample percentage
+\end{itemize}
+To examine the effects of changing each of the configurable parameters a base set of control parameters are chosen:
+\begin{itemize}[topsep=0pt]
+    \item Population size: 1000
+    \item Parameter blending: 0.9
+    \item Elite sample percentage: 0.1
+\end{itemize}
+The size of the molecule is set to N=40.
 
 \subsection{Population Size}
 \begin{figure}[H]
-    \includegraphics[scale=0.55]{CE_population}
+    \includegraphics[scale=0.50]{CE_population}
     \caption{Population Size vs Score (Average over 3 runs)}
     \label{ce population}
 \end{figure}
+\par Figure \ref{ce population} shows how the change in population influences best score found by the optimizer. While there is no observable trend in the figure it is observed that population sizes below 300 result in very poor scores. The best scores are found in the range of 1300-3000 with no obvious determination as to which population values result in the best scores. Based on the data the optimal population size is determined to be 1300 as it is in the range of optimums and is not as computationally intensive as generating and processing larger populations.
 
 \subsection{Elite Sample Size}
 \begin{figure}[H]
-    \includegraphics[scale=0.45]{CE_elitesample}
+    \includegraphics[scale=0.38]{CE_elitesample}
     \caption{Elite Sample \% vs Score (Average over 3 runs)}
     \label{ce elitesample}
 \end{figure}
 
+\par Figure \ref{ce elitesample} shows how the size of the elite sample influences the best scores found. It it clear from the graph that very small (5\% or less) and very large (15\% or greater) elite sample sizes have a detrimental effect to the effectiveness of the algorithm. The best scores clustering around the 11-12\% mark suggests that the ideal value for the size of the elite sample is 11-12\% of the population. Although if the size of the population is very large it may be advisable to reduce the size of the elite sample to increase selectivity. 
+
 \subsection{Parameter Blending}
 \begin{figure}[H]
-    \includegraphics[scale=0.45]{CE_blending}
+    \includegraphics[scale=0.43]{CE_blending}
     \caption{Parameter Blending vs Score (Average over 3 runs)}
     \label{ce blending}
 \end{figure}
+\par Figure \ref{ce blending} shows a very clear downward trend which suggests that the ideal amount of parameter blending is minimal. Parameter blending in the range of 85-95\% gives the best results.
+
+\subsection{Ideal Parameters - BFGS}
+\par After parameter optimization for the CE method the same parameters were used to achieve the best results when combining the CE Method with BFGS. The exception to this was population size, as the BFGS optimization step is computationally intensive due to the calculation of energy gradients the population size had to be decreased to 300 in order to speed up the algorithm and allow the global CE Optimizer to explore multiple minima without time constraint.
+
+\section{Partial Restarting and Local Minima Hopping Methods}
+As the CE Method will slowly converge on a local minima different partial restart operators were tested in order to hop to other potentially better minima.
 
 \section{Algorithm Performance}
-\subsection{CE Method}
-
 \subsection{CE - Scores}
 \begin{table}[!ht]
     \begin{tabularx}{\columnwidth}{XXXXXX}
@@ -221,7 +241,7 @@ Specifying a smoothing parameter can be useful \cite{CE2}. The smoothing paramet
 \end{table}
 
 
-\subsection{CE Method - BFGS}
+\subsection{CE Method with BFGS}
 \begin{table}[!ht]
     \begin{tabularx}{\columnwidth}{XXXXXX}
     N  & Optimal & Best Found & N  & Optimal & Best Found \\ \hline
@@ -256,7 +276,10 @@ Specifying a smoothing parameter can be useful \cite{CE2}. The smoothing paramet
     \label{BFGSCE_RESULTS}
 \end{table}
 
+\section{Results}
 
+
+\section{Conclusion}
 
 \clearpage
 \bibliographystyle{apacite}
