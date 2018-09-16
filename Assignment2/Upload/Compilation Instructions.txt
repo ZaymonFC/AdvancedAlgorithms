@@ -1,1 +1,0 @@
-CrossEntropy: g++ -std=c++17 -O3 CrossEntropy-Molecule.cpp
