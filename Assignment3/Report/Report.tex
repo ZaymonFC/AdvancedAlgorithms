@@ -1,0 +1,119 @@
+\documentclass[conference,letterpaper]{IEEEtran}
+\IEEEoverridecommandlockouts
+%
+% ─── PREAMBLE ───────────────────────────────────────────────────────────────────
+% \usepackage[a4paper, total={7in, 8in}]{geometry}
+% \usepackage{fancyhdr}
+
+% \fancypagestyle{plain}{%
+%    \fancyhf{}
+%    \fancyfoot[C]{\iffloatpage{}{\thepage}}
+%    \renewcommand{\headrulewidth}{0pt}}
+% \pagestyle{plain}
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage{apacite}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{enumitem}
+% \usepackage{pgfplots}
+\usepackage{tabularx}
+
+\usepackage{mathtools}  
+\mathtoolsset{showonlyrefs}  
+
+\lstset{
+    basicstyle=\footnotesize,
+    columns=fullflexible,
+    breaklines=true,
+    tabsize=2,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}
+}
+
+\graphicspath{{./images/}}
+
+%
+% ──────────────────────────────────────────────────────────────────── II ──────────
+%   :::::: R E P O R T   O P E N I N G : :  :   :    :     :        :          :
+% ──────────────────────────────────────────────────────────────────────────────
+%
+% \title{Advanced Algorithms Assignment 2}
+% \author{Zaymon Foulds-Cook}
+
+\begin{document}
+
+\title{Approximating Minimum Vertex Cover}
+\author{
+    \IEEEauthorblockN{Zaymon Foulds-Cook s5017391}
+    \IEEEauthorblockA{
+        School of Information Communication Technology \\
+        Griffith University, Gold Coast Campus \\
+        Gold Coast, QLD, Australia
+    }
+    % \IEEEauthorblockA{
+    %     Starfleet Academy\\
+    %     San Francisco, California 96678-2391\\
+    %     Telephone: (800) 555--1212\\
+    %     Fax: (888) 555--1212
+    % }
+}
+
+\maketitle
+
+\begin{abstract}
+    This paper defines a real coded approach to approximating the minimum vertex cover of dense graphs...
+\end{abstract}
+
+%
+% ─── INTRODUCTION ───────────────────────────────────────────────────────────────
+%   
+\section{Introduction}
+\subsection{Problem Statement}
+\par The minimum vertex cover (mvc) given by:
+\begin{equation}
+    \begin{split}
+        \mbox{mvc} = V' \subset V \mbox{ in graph } G(V,E) \\
+        \mbox{such that } uv \in E \Rightarrow u \in V' \lor v \in V'
+    \end{split}
+\end{equation}
+
+\par That is to say the minimal set of vertices where every edge in graph $G(V,E)$ has at least one endpoint to a vertex in the vertex cover. Developing efficient algorithms for the mvc problem has real application. The SNP assembly problem in computation biochemistry can be resolved by finding the minimum vertex cover in order to resolve conflicts between sequences in a sameple \cite{pirzada}. Another use for finding the mvc is in computer networking security as a team of computer scientists affiliated with the `Virology and Cryptology Lab' and the French Navy, `ESCANSIC' ``... have recently used the vertex cover algorithm [6] to simulate the propagation of stealth worms on large computer networks and design optimal strategies for protecting the network against such virus attacks in real-time." \cite{pirzada}. 
+\par The vertex cover problem can be applied to the traveling salesman problem. Vertex cover was also used as the main algorithmic engine in a method of nearest-neighbor data classification \cite{gkk}.
+
+\par The mvc problem is classified in the NP-hard class of problems and was proven to be NP-Complete in a landmark paper in 1972 \cite{kar72}. The mvc problem is a classical optimization problem in the field of computer science and finite combinatorics. The minimum vertex cover can also be represented as:
+\begin{equation}
+    \begin{split}
+        \mbox{all } V \notin \mbox{Maximum Independent Set of } \\ 
+        compliment(G(V, E))
+    \end{split}
+\end{equation}
+
+\section{Literature Review}
+\par A multitude of approximation algorithms exist for finding approximate vertex covers in various graphs. One such algorithm is the Djikstra based algorithm proposed by Chen \cite{chen16}. An advantage of this algorithm is the bounding exponential time complexity of $\mathcal{O}(n^{3})$ where n is the number of vertices in the graph. A disadvantage to the approach is the approximation ratio is 2. This approximation while fast is not effective at finding vertex covers close to optimality.
+\par Another approach which has been investigated is a local search method with greedy heuristics. An approach proposed by Balaji uses heuristics to generate quality solutions for a variety of graphs \cite{balaji13}. The approach when compared experimentally with hBOA and Dual-LP algorithms produces solutions closer to optimality, especially diverging from the comparison algorithms as the size of the graph increases. The algorithm uses guiding heuristics in a greedy manner to determine which vertex to add to the expanding vertex cover. Another greedy heuristic driven approach proposed by Tomar, uses the maximum degree of vertices in the current evaluated neighborhood as the guiding heuristic \cite{tomar14}.
+\par An approach proposed by Pullan leverages a new maximum clique algorithm called Phased Local Search \cite{pullan06} and applies it to the maximum independent set/minimum vertex cover problem. The algorithm applies a series of sub-algorithms alternating between phases of incremental growth and plateau searching. The incremental growth component will rapidly increase the size of the maximum independent set or vertex cover until there are no more candidates to be added to the set. Then a phase of plateau search uses different methods and operators to swap and evaluate different combinations of nodes with countermeasures to avoid stagnation caused by cycling or nodes which confuse the initial heuristic \cite{pullan09}.
+
+\section{Algorithm Description}
+
+\section{Algorithm Performance}
+
+\section{Results}
+
+\section{Conclusion}
+
+\clearpage
+\bibliographystyle{apacite}
+\bibliography{references}
+
+
+%
+% ─── END ────────────────────────────────────────────────────────────────────────
+%
+\end{document}

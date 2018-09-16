@@ -1,0 +1,216 @@
+\begin{thebibliography}{}
+
+\bibitem [\protect \citeauthoryear {%
+Balaji%
+}{%
+Balaji%
+}{%
+{\protect \APACyear {2013}}%
+}]{%
+balaji13}
+\APACinsertmetastar {%
+balaji13}%
+\begin{APACrefauthors}%
+Balaji, s.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2013}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {A Local Search Based Greedy Heuristic For Minimum Vertex
+  Cover Problem} {A local search based greedy heuristic for minimum vertex
+  cover problem}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Far East Journal of Mathematical
+  Sciences}{79}{2}{257-266}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Chen%
+, Kou%
+\BCBL {}\ \BBA {} Cui%
+}{%
+Chen%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2016}}%
+}]{%
+chen16}
+\APACinsertmetastar {%
+chen16}%
+\begin{APACrefauthors}%
+Chen, J.%
+, Kou, L.%
+\BCBL {}\ \BBA {} Cui, X.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2016}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {An Approximation Algorithm for the Minimum Vertex Cover
+  Problem} {An approximation algorithm for the minimum vertex cover
+  problem}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Procedia Engineering}{137}{}{180-185}.
+\newblock
+\begin{APACrefDOI} \doi{10.1016/j.proeng.2016.01.248} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Gottlieb%
+, Kontorovich%
+\BCBL {}\ \BBA {} Krauthgamer%
+}{%
+Gottlieb%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2014}}%
+}]{%
+gkk}
+\APACinsertmetastar {%
+gkk}%
+\begin{APACrefauthors}%
+Gottlieb, L\BHBI A.%
+, Kontorovich, A.%
+\BCBL {}\ \BBA {} Krauthgamer, R.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2014}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Efficient Classification for Metric Data} {Efficient
+  classification for metric data}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{IEEE Transactions on Information
+  Theory}{60}{9}{5750-5759}.
+\newblock
+\begin{APACrefDOI} \doi{10.1109/tit.2014.2339840} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Karp%
+}{%
+Karp%
+}{%
+{\protect \APACyear {1972}}%
+}]{%
+kar72}
+\APACinsertmetastar {%
+kar72}%
+\begin{APACrefauthors}%
+Karp, R.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1972}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Reducibility among combinatorial problems} {Reducibility
+  among combinatorial problems}.{\BBCQ}
+\newblock
+\BIn{} R.~Miller\ \BBA {} J.~Thatcher\ (\BEDS), \APACrefbtitle {Complexity of
+  Computer Computations} {Complexity of computer computations}\ (\BPGS\
+  85--103).
+\newblock
+\APACaddressPublisher{}{Plenum Press}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Pirzada%
+}{%
+Pirzada%
+}{%
+{\protect \APACyear {2007}}%
+}]{%
+pirzada}
+\APACinsertmetastar {%
+pirzada}%
+\begin{APACrefauthors}%
+Pirzada, S.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2007}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Applications of graph theory} {Applications of graph
+  theory}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{PAMM}{7}{1}{2070013-2070013}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Pullan%
+}{%
+Pullan%
+}{%
+{\protect \APACyear {2006}}%
+}]{%
+pullan06}
+\APACinsertmetastar {%
+pullan06}%
+\begin{APACrefauthors}%
+Pullan, W.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2006}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Phased local search for the maximum clique problem}
+  {Phased local search for the maximum clique problem}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Combinatorial Optimization}{12}{3}{303-323}.
+\newblock
+\begin{APACrefDOI} \doi{10.1007/s10878-006-9635-y} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Pullan%
+}{%
+Pullan%
+}{%
+{\protect \APACyear {2009}}%
+}]{%
+pullan09}
+\APACinsertmetastar {%
+pullan09}%
+\begin{APACrefauthors}%
+Pullan, W.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2009}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Optimisation of unweighted/weighted maximum independent
+  sets and minimum vertex covers} {Optimisation of unweighted/weighted maximum
+  independent sets and minimum vertex covers}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Discrete Optimization}{6}{2}{214-219}.
+\newblock
+\begin{APACrefDOI} \doi{10.1016/j.disopt.2008.12.001} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Tomar%
+}{%
+Tomar%
+}{%
+{\protect \APACyear {2014}}%
+}]{%
+tomar14}
+\APACinsertmetastar {%
+tomar14}%
+\begin{APACrefauthors}%
+Tomar, D.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2014}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {An Improved Greedy Heuristic for Unweighted Minimum
+  Vertex Cover} {An improved greedy heuristic for unweighted minimum vertex
+  cover}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{2014 International Conference on Computational
+  Intelligence and Communication Networks}{}{}{}.
+\newblock
+\begin{APACrefDOI} \doi{10.1109/cicn.2014.138} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\end{thebibliography}
