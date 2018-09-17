@@ -18,9 +18,10 @@ def GoldenSection(xL,  xU, f):
         if (f1 > f2):
             xL = x2
             x2 = x1
+            f2 = f1
+
             d = D(xU, xL)
             x1 = xL + d
-            f2 = f1
             f1 = f(x1)
         else:
             xU = x1
