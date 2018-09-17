@@ -8,7 +8,6 @@ def func(x):
     return 2 * math.sin(x) - (x * x) / 10.0
 
 def GoldenSection(xL,  xU, f):
-    r = 0.61803
     d = D(xU, xL)
     x1 = xL + d
     x2 = xU - d

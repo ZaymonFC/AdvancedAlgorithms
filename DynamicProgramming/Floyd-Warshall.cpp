@@ -39,11 +39,11 @@ int main()
 		{0, INT_MAX, INT_MAX, INT_MAX, 6, 0},
 	};
 
-	auto p = std::vector<std::vector<int>>();
-	for (auto i = 0; i < 7; ++i) {
-		auto row = std::vector<int>(6, 0);
-		p.push_back(row);
-	}
+	// auto p = std::vector<std::vector<int>>();
+	// for (auto i = 0; i < 7; ++i) {
+	// 	auto row = std::vector<int>(6, 0);
+	// 	p.push_back(row);
+	// }
 
 	PrintMatrix(FloydWarshall(D));
 
