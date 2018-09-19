@@ -23,7 +23,7 @@ def Djikstra(graph, src):
     dist[src] = 0
 
     # Find shortest path for all vertices 0 <= count < |v| - 1
-    for count in range(dimension - 1):
+    for _ in range(dimension - 1):
         minVertex = MinimumDistance(dist, sptSet)
 
         # Mark picked vertex as processedD

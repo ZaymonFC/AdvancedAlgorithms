@@ -11,7 +11,6 @@ def BFS(graph, source, sink, parent):
     q.put(source)
     visited[source] = True
     
-    # Standard BFS Loop
     while not q.empty():
         u = q.get()
 
@@ -28,7 +27,6 @@ def EdmondKarp(graph, source, sink):
     
     # Array to be filled by BFS to store path
     parent = [-1] * node_count
-
     max_flow = 0
 
     while BFS(graph, source, sink, parent):
