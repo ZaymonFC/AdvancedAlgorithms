@@ -12,7 +12,8 @@ public:
 	Graph(int vertexCount);
 	
 	// Creational Functions
-	auto AddEdge(int node1, int node2) -> void;
+	auto AddEdgeMatrix(int node1, int node2) -> void;
+	auto AddEdgeLists(int node1, int node2) -> void;
 	auto ConvertToCompliment() -> void;
 
 	~Graph() = default;

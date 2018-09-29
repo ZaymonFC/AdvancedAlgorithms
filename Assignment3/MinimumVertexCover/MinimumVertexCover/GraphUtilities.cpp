@@ -28,7 +28,7 @@ auto GraphUtilities::LoadGraph(std::string fileName) -> Graph
 			const auto tokens = Split(str, ' ');
 			const auto node1 = std::stoi(tokens.at(1));
 			const auto node2 = std::stoi(tokens.at(2));
-			graph.AddEdge(node1, node2);
+			graph.AddEdgeMatrix(node1, node2);
 		}
 	}
 

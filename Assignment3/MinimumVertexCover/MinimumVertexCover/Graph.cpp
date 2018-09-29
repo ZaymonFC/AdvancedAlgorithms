@@ -19,10 +19,16 @@ Graph::Graph(int vertexCount)
 	}
 }
 
-auto Graph::AddEdge(int node1, int node2) -> void
+auto Graph::AddEdgeMatrix(int node1, int node2) -> void
 {
 	matrix.at(node1).at(node2) = true;
 	matrix.at(node2).at(node1) = true;
+}
+
+auto Graph::AddEdgeLists(int node1, int node2) -> void
+{
+	nodes.at(node1).emplace_back(node2);
+	nodes.at(node2).emplace_back(node1);
 	edges++;
 }
 
@@ -32,11 +38,11 @@ auto Graph::ConvertToCompliment() -> void
 	{
 		for (auto j = i + 1; j < vertices; j++)
 		{
-//			if (i == j) continue;
-			if (matrix.at(i).at(j))
+			if (!matrix.at(i).at(j))
 			{
-				AddEdge(i, j);
+				AddEdgeLists(i, j);
 			}
+			matrix.at(i).at(j) = !matrix.at(i).at(j);
 		}
 	}
 }
