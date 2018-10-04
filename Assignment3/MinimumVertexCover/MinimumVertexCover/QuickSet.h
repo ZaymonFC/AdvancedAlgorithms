@@ -15,5 +15,6 @@ public:
 	void Insert(int id);
 	void Remove(int id);
 	std::vector<int> Items();
+	std::vector<int> Inverse() const;
 };
 

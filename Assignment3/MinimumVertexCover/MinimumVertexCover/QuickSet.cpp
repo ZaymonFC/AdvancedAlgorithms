@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "QuickSet.h"
+#include <iostream>
 
 QuickSet::QuickSet(int maximumSize)
 {
@@ -47,10 +48,12 @@ void QuickSet::Insert(int id)
 
 void QuickSet::Remove(int id)
 {
+	if (id < 0 || id > x.size()) std::cout << "Broken ID: " << id;
 	if (nx.at(id) == -1) return;
 	const auto position = nx.at(id);
 	x.at(position) = x.at(lx - 1);
 	nx.at(id) = -1;
+	lx--;
 }
 
 std::vector<int> QuickSet::Items()
@@ -58,6 +61,17 @@ std::vector<int> QuickSet::Items()
 	const auto first = x.begin();
 	const auto last = x.begin() + lx;
 	return std::vector<int>(first, last);
+}
+
+std::vector<int> QuickSet::Inverse() const
+{
+	auto inverse = std::vector<int>();
+	inverse.reserve(x.size() - lx);
+	for (auto i = 0; i < nx.size(); i++)
+	{
+		if (nx.at(i) == -1) inverse.emplace_back(i);
+	}
+	return inverse;
 }
 
 
