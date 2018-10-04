@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="Graph.h" />
     <ClInclude Include="GraphUtilities.h" />
+    <ClInclude Include="QuickSet.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -156,6 +157,7 @@
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="GraphUtilities.cpp" />
     <ClCompile Include="MinimumVertexCover.cpp" />
+    <ClCompile Include="QuickSet.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
