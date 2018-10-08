@@ -72,7 +72,7 @@
 \maketitle
 
 \begin{abstract}
-    This paper defines a real coded approach to searching for minimal vertex covers in dense graphs. The proposed search approach failed to perform to expectations, however, still yielded results within close margins of the minima.
+    This paper defines a real coded approach to searching for minimal vertex covers in dense graphs. The proposed search methodology failed find optimal solutions, however, still yielded vertex covers within close margins of the minima for most of benchmark graphs.
 \end{abstract}
 
 %
@@ -106,8 +106,8 @@
 \par An approach proposed by Pullan leverages a new maximum clique algorithm called Phased Local Search (PLS) \cite{pullan06} and applies it to the maximum independent set/minimum vertex cover problem. ``PLS is a stochastic reactive dynamic local search algorithm that interleaves sub-algorithms which alternate between sequences of iterative improvement'' \cite{pullan09}. The algorithm applies a series of sub-algorithms alternating between phases of incremental growth and plateau searching. The incremental growth component will rapidly increase the size of the maximum independent set or vertex cover until there are no more candidates to be added to the set. Then a phase of plateau search uses different methods and operators to swap and evaluate different combinations of nodes with countermeasures to avoid stagnation caused by cycling or nodes which confuse the initial heuristic \cite{pullan09}.
 
 \section{Algorithm Description}
-\par The algorithm used in this experiment attempts to use phased local search. The search algorithm uses iterative phases of set building, plateau search and set reduction in an attempt to improve a solution. The algorithm initially utilizes a greedy search to build the initial set where the heuristic is the number of nodes adjacent to a prospective node subtracted by the number of adjacent nodes which are already contained within the cover set.
-\par The set implementation uses quick lists which provide methods for find(), insert() and delete in constant time without the overhead of hashing and searching within buckets. This data structure is well suited to the problem and will result in a higher level of performance in comparison with hash based unordered sets. The complexity of generating the degree lists is $\mathcal{O}((|V| - |V\prime|)|E|)$. The degree lists are constructed by iterating through the adjacency lists of nodes not currently contained within the cover set. 
+\par The algorithm used in this experiment attempts to use phased local search. The search algorithm uses iterative phases of set building, plateau search and set reduction in an attempt to improve the current vertex cover. The algorithm initially utilizes a greedy search to build the initial set where the heuristic is the number of nodes adjacent to a prospective node subtracted by the number of adjacent nodes which are already contained within the cover set.
+\par The set implementation uses quick lists which provide methods for find, insert and delete in constant time without the overhead of hashing and searching within buckets. This data structure is well suited to the problem and will result in a higher level of performance in comparison with hash based unordered sets. The complexity of generating the degree lists is $\mathcal{O}((|V| - |V\prime|)|E|)$. The degree lists are constructed by iterating through the adjacency lists of nodes not currently contained within the cover set. 
 \par The score for each node is defined as:
 \begin{equation}
     H(v)=|\mbox{adjacent}[v] \cap V\prime|
