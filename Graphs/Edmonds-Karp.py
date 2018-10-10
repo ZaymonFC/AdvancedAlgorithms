@@ -18,8 +18,8 @@ def BFS(graph, source, sink, parent):
         for ind, val in enumerate(graph[u]):
             if visited[ind] is False and val > 0:
                 q.put(ind)
-                visited[ind] = True
                 parent[ind] = u
+                visited[ind] = True
     return True if visited[sink] else False
 
 def EdmondKarp(graph, source, sink):

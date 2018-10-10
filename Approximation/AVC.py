@@ -1,6 +1,6 @@
 def ApproximateVertexCover(graph, s):
     cover = []
-    visited = [False for x in range(s)]
+    visited = [False for _ in range(s)]
 
     for u in range(s):
         if not visited[u]:
