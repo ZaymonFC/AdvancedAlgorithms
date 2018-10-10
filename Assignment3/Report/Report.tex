@@ -23,10 +23,10 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage{enumitem}
-% \usepackage{pgfplots}
 \usepackage{tabularx}
-
-\usepackage{mathtools}  
+\usepackage{caption}
+\usepackage{mathtools}
+\usepackage{xcolor}
 \mathtoolsset{showonlyrefs}  
 
 \lstset{
@@ -34,7 +34,11 @@
     columns=fullflexible,
     breaklines=true,
     tabsize=2,
-    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+    emph={
+      for, ALGORITHM, Graph, QuickSet, penalty, degree
+    },
+    emphstyle={\color{black}\bfseries}
 }
 
 \graphicspath{{./images/}}
@@ -49,7 +53,7 @@
 
 \begin{document}
 
-\title{Approximating Minimum Vertex Cover}
+\title{Phased Local Search for Optimising Minimum Vertex Covers in Dense Unweighted Graphs}
 \author{
     \IEEEauthorblockN{Zaymon Foulds-Cook s5017391}
     \IEEEauthorblockA{
@@ -68,7 +72,7 @@
 \maketitle
 
 \begin{abstract}
-    This paper defines a real coded approach to approximating the minimum vertex cover of dense graphs...
+    This paper defines a real coded approach to searching for minimal vertex covers in dense graphs. The proposed search methodology failed find optimal solutions, however, still yielded vertex covers within close margins of the minima for most of benchmark graphs.
 \end{abstract}
 
 %
@@ -76,39 +80,72 @@
 %   
 \section{Introduction}
 \subsection{Problem Statement}
-\par The minimum vertex cover (mvc) given by:
+\par The vertex cover (vc) is given by:
 \begin{equation}
     \begin{split}
-        \mbox{mvc} = V' \subset V \mbox{ in graph } G(V,E) \\
-        \mbox{such that } uv \in E \Rightarrow u \in V' \lor v \in V'
+        \mbox{vc} = V\prime \subset V \mbox{ in graph } G(V,E) \\
+        \mbox{such that } uv \in E \Rightarrow u \in V\prime \lor v \in V\prime
     \end{split}
 \end{equation}
+\par A minimal vertex cover is the smallest possible vertex cover for a graph $G$.
 
-\par That is to say the minimal set of vertices where every edge in graph $G(V,E)$ has at least one endpoint to a vertex in the vertex cover. Developing efficient algorithms for the mvc problem has applications in various fields. The SNP assembly problem in computation biochemistry can be resolved by finding the minimum vertex cover in order to resolve conflicts between sequences in a sameple \cite{pirzada}. Another use for finding the mvc is in computer networking security as a team of computer scientists affiliated with the `Virology and Cryptology Lab' and the French Navy, `ESCANSIC' ``... have recently used the vertex cover algorithm [6] to simulate the propagation of stealth worms on large computer networks and design optimal strategies for protecting the network against such virus attacks in real-time." \cite{pirzada}. 
+\par That is to say the minimal set of vertices where every edge in graph $G(V,E)$ has at least one endpoint to a vertex in the vertex cover. Developing efficient algorithms for the mvc problem has applications in various fields. The SNP assembly problem in computation biochemistry can be resolved by finding the minimum vertex cover in order to resolve conflicts between sequences in a sample \cite{pirzada}. Another use for finding the mvc is in computer networking security as a team of computer scientists affiliated with the `Virology and Cryptology Lab' and the French Navy, `ESCANSIC' ``... have recently used the vertex cover algorithm [6] to simulate the propagation of stealth worms on large computer networks and design optimal strategies for protecting the network against such virus attacks in real-time." \cite{pirzada}. 
 \par The vertex cover problem can be applied to the traveling salesman problem. Vertex cover was also used as the main algorithmic engine in a method of nearest-neighbor data classification applicable in intelligent systems and data analysis \cite{gkk}.
 
 \par The mvc problem is classified in the NP-hard class of problems and was proven to be NP-Complete in a landmark paper in 1972 \cite{kar72}. The mvc problem is a classical optimization problem in the field of computer science and finite combinatorics. The minimum vertex cover can also be represented as:
 \begin{equation}
     \begin{split}
         \mbox{all } V \notin \mbox{Maximum Independent Set of } \\ 
-        compliment(G(V, E))
+        G'(V, E)
     \end{split}
 \end{equation}
 
 \section{Literature Review}
-\par A multitude of approximation algorithms exist for finding approximate vertex covers in various graphs. One such algorithm is the Djikstra based algorithm proposed by Chen \cite{chen16}. An advantage of this algorithm is the bounding exponential time complexity of $\mathcal{O}(n^{3})$ where n is the number of vertices in the graph. A disadvantage to the approach is the approximation ratio is 2. This approximation while fast is not effective at finding vertex covers close to optimality.
+\par A multitude of approximation algorithms exist for finding approximate vertex covers in various graphs. One such algorithm is the Dijkstra based algorithm proposed by Chen \cite{chen16}. An advantage of this algorithm is the bounding exponential time complexity of $\mathcal{O}(n^{3})$ where n is the number of vertices in the graph. A disadvantage to the approach is the approximation ratio is 2. This approximation, while fast, is not effective at finding vertex covers close to the optimal solution.
 \par Another approach which has been investigated is a local search method with greedy heuristics. An approach proposed by Balaji uses heuristics to generate quality solutions for a variety of graphs \cite{balaji13}. The approach when compared experimentally with hBOA and Dual-LP algorithms produces solutions closer to optimality, especially diverging from the comparison algorithms as the size of the graph increases. The algorithm uses guiding heuristics in a greedy manner to determine which vertex to add to the expanding vertex cover. Another greedy heuristic driven approach proposed by Tomar, uses the maximum degree of vertices in the current evaluated neighborhood as the guiding heuristic \cite{tomar14}.
-\par An approach proposed by Pullan leverages a new maximum clique algorithm called Phased Local Search \cite{pullan06} and applies it to the maximum independent set/minimum vertex cover problem. The algorithm applies a series of sub-algorithms alternating between phases of incremental growth and plateau searching. The incremental growth component will rapidly increase the size of the maximum independent set or vertex cover until there are no more candidates to be added to the set. Then a phase of plateau search uses different methods and operators to swap and evaluate different combinations of nodes with countermeasures to avoid stagnation caused by cycling or nodes which confuse the initial heuristic \cite{pullan09}.
+\par An approach proposed by Pullan leverages a new maximum clique algorithm called Phased Local Search (PLS) \cite{pullan06} and applies it to the maximum independent set/minimum vertex cover problem. ``PLS is a stochastic reactive dynamic local search algorithm that interleaves sub-algorithms which alternate between sequences of iterative improvement'' \cite{pullan09}. The algorithm applies a series of sub-algorithms alternating between phases of incremental growth and plateau searching. The incremental growth component will rapidly increase the size of the maximum independent set or vertex cover until there are no more candidates to be added to the set. Then a phase of plateau search uses different methods and operators to swap and evaluate different combinations of nodes with countermeasures to avoid stagnation caused by cycling or nodes which confuse the initial heuristic \cite{pullan09}.
 
 \section{Algorithm Description}
+\par The algorithm used in this experiment attempts to use phased local search. The search algorithm uses iterative phases of set building, plateau search and set reduction in an attempt to improve the current vertex cover. The algorithm initially utilizes a greedy search to build the initial set where the heuristic is the number of nodes adjacent to a prospective node subtracted by the number of adjacent nodes which are already contained within the cover set.
+\par The set implementation uses quick lists which provide methods for find, insert and delete in constant time without the overhead of hashing and searching within buckets. This data structure is well suited to the problem and will result in a higher level of performance in comparison with hash based unordered sets. The complexity of generating the degree lists is $\mathcal{O}((|V| - |V\prime|)|E|)$. The degree lists are constructed by iterating through the adjacency lists of nodes not currently contained within the cover set. 
+\par The score for each node is defined as:
+\begin{equation}
+    H(v)=|\mbox{adjacent}[v] \cap V\prime|
+\end{equation}
+\par The complexity of determining if a current set is a vertex cover is at worst case $\mathcal{O}(|E|)$ as the algorithm iterates through the upper triangular matrix of the adjacency matrix for the graph and if an edge exists where either nodes u or v are not in the current cover set returns false.
 
-\section{Algorithm Performance}
+\subsection{The algorithm is as follows:}
+\lstinputlisting[language=python]{algorithm.py}
+
+\subsection{Plateau Search}
+\par Examining the pseudocode will reveal the methods used for different phases of the plateau search. The first method is a search which picks a random number n between 1 and 10 and then removes n nodes from the vertex set (providing that they are not currently under penalty). The search then picks nodes from a sorted list based on the nodes degree to repopulate the vertex set (providing the node is not under penalty). After each insertion the algorithm checks to see if the current vertex set results in a new vertex cover and if it does then the insertion loop breaks. 
+\par The next phase of the plateau search removes an element and then performs a number of swaps to try and restore the property of the vertex set being a vertex cover. If no better cover is found then the loop reinserts a new element and goes back to the first phase of the plateau search. In each of the plateau search methods different selection methods were experimented with. In an attempt to find better solutions different mechanisms of node selection were used during different phases of the plateau search. 
+\par Both random swaps and insertions were trialed along with swaps and insertions based off penalty and node degree. The parameters for number of swaps, and the number of iterations a node will be placed in the penalty list for were both changed experimentally.
 
 \section{Results}
+\begin{table}[!h]
+    \begin{tabularx}{\linewidth}{|X|r|r|r|}
+    \hline
+    Graph   & Vertices & Best VC Found & Optimal MVC \\ \hline
+    brock800\_1.clq  & 800 & 782                     & 777  \\
+    brock800\_2.clq  & 800 & 782                     & 776  \\
+    brock800\_3.clq  & 800 & 781                     & 775  \\
+    brock800\_4.clq  & 800 & 783                     & 774  \\
+    c2000.9.clq      & 4000 & 1941                   & 1922 \\
+    c4000.5.clq      & 2000 & 3988                   & 3982 \\
+    p\_hat1500-1.clq & 1500 & 1491                   & 1488 \\
+    MANN\_a45.clq    & 1035 & 704                    & 691  \\ \hline
+    \end{tabularx}
+\end{table}
 
-\section{Conclusion}
+\par For all graphs the proposed search algorithm did not find instances of minimal vertex covers. However, the algorithm found vertex covers within a small margin of the minimal vertex cover for the graphs brock800\_1, brock800\_2, brock800\_3, brock800\_4 c4000.5, p\_hat1500-1 and MANN\_a45. 
+\par When comparing and contrasting the results yielded by the proposed search algorithm to results presented by Pullan using a variant of Phased Local Search the proposed algorithm fails to effectively identify minimal vertex covers in 100\% of trials \cite{pullan09}.
 
-\clearpage
+\section{Conclusions and Future Work}
+This study has shown that by applying elements of phased local search to the minimal vertex cover problem, solutions can be found within a small margin of the minima in most cases. To improve the efficiency and effectiveness of the algorithm further research and experimentation is needed.
+\par By experimenting with node selection approaches and developing different methods for plateau search future studies are likely to produce results which will rival or surpass the approach taken.
+
+\newpage
 \bibliographystyle{apacite}
 \bibliography{references}
 
