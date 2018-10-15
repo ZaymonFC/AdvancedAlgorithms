@@ -1,17 +1,19 @@
-def KnapSack(knapWt, objWts, objVals):
-    n = len(objWts)
-    M = [[0 for i in range(knapWt + 1)] for j in range(n+1)]
+# Knapsack Problem
+def Knapsack(targetWeight, objectValues, objectWeights):
+    n = len(objectValues)
+    m = [0 for _ in range(targetWeight + 1) for _ in range(n + 1)]
 
-    for i in range(1, n+1):
-        for w in range(1, knapWt+1):
-            if objWts[i-1] <= w:
-                M[i][w] = max(objVals[i-1] + M[i-1][w - objWts[i-1]], M[i-1][w])
+    for i in range(1, n + 1):
+        for w in range(1, targetWeight + 1):
+            if objectWeights[i - 1] <= w:
+                m[i][w] = max(objectValues[i-1] + m[i - 1], w - objectWeights[i - 1]], m[i-1][w])
             else:
-                M[i][w] = M[i-1][w]
-    return M[n][knapWt]
+                m[i][w] = m[i - 1][w]
+    return m[n][targetWeight]
 
-knapWt = 50
-objWts = [10, 20, 30]
-objVals = [60, 100, 120]
 
-print(KnapSack(knapWt, objWts, objVals))
+weightLimit = 50
+objectWeights = [10, 20, 30]
+objValues = [60, 100, 120]
+
+print(Knapsack(weightLimit, objectWeights, objValues))
