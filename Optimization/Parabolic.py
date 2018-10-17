@@ -3,29 +3,29 @@ import math
 def func(x):
     return 2 * math.sin(x) - x**2 / 10
 
-def Parabolic(xlef, xrig, func):
+def Parabolic(xL, xU, f):
     x = 1
-    x1 = 0
-    xmid = (xlef + xrig) / 2
-    fxlef = func(xlef)
-    fxmid = func(xmid)
-    fxrig = func(xrig)
+    xPrevious = 0
+    xM = (xL + xU) / 2
+    fL = f(xL)
+    fM = f(xM)
+    fU = f(xU)
 
-    while (abs(x - x1) > 3e-8):
-        x1 = x
-        top = (xmid - xlef) ** 2 * (fxmid - fxrig) - (xmid - xrig) ** 2 * (fxmid - fxlef)
-        bot = (xmid - xlef) * (fxmid - fxrig) - (xmid - xrig) * (fxmid - fxlef)
-        x = xmid - 0.5 * (top / bot)
+    while abs(x - xPrevious) > 3e-8:
+        xPrevious = x
+        top = (xM - xL) ** 2 * (fM - fU) - (xM - xU) ** 2 * (fM - fL)
+        bot = (xM - xL) * (fM - fU) - (xM - xU) * (fM - fL)
+        x = xM - 0.5 * (top / bot)
 
-        if (fxlef > fxrig):
-            xrig = xmid
-            fxrig = fxmid
+        if fL > fU:
+            xU = xM
+            fU = fM
 
         else:
-            xlef = xmid
-            fxlef = fxmid
-        xmid = x
-        fxmid = func(x)
+            xL = xM
+            fL = fM
+        xM = x
+        fM = f(x)
     return x
 
 print(Parabolic(1, 3, func))
